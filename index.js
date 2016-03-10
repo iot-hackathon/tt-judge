@@ -5,7 +5,17 @@ var http = require('http');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var fs = require('fs');
-var serverPort = 8080;
+// var serverPort = 8080;
+
+
+// cfenv provides access to your Cloud Foundry environment
+// for more info, see: https://www.npmjs.com/package/cfenv
+var cfenv = require('cfenv');
+
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv();
+var serverPort = appEnv.port || 8080;
+
 
 // swaggerRouter configuration
 var options = {
