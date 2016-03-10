@@ -93,11 +93,12 @@ function point(req, res) {
 }
 
 // ============================================================================
-// swagPutSpsVarValue
+// startNewGame
 // ============================================================================
 function startNewGame(req, res) {
     logger.debug("--- startNewGame ---");
     score = JSON.parse(JSON.stringify(emptyScore));
+    prevScore = JSON.parse(JSON.stringify(emptyScore));
     res.end();
 }
 
