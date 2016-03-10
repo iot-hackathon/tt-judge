@@ -7,9 +7,37 @@ var logger = log4js.getLogger();
 var util = require('util');
 
 
-var pointsLeftPlayer = 0;
-var pointsRightPlayer = 0;
+var score = {
+    "playerLeftName": "Sebastian",
+    "playerRightName": "Matthias",
+    "pointsLeftPlayer": 0,
+    "pointsRightPlayer": 0,
+    "directWinnersPlayerLeft": "0",
+    "errorsPlayerLeft": "0",
+    "directWinnersPlayerRight": "0",
+    "errorsPlayerRight": "0",
+    "sets" : {
+      "first" : {
+        "left": 0,
+        "right" : 0
+      },
+      "second" : {
+        "left": 0,
+        "right" : 0
+      },
+      "third" : {
+        "left": 0,
+        "right" : 0
+      }
+    }
+}
 
+var prevScore = JSON.parse(JSON.stringify(score));
+
+// var pointsLeftPlayer = 0;
+// var pointsRightPlayer = 0;
+// var setsLeftPlayer = 0;
+// var setsRightPlayer = 0;
 
 // ============================================================================
 // getScore
@@ -17,20 +45,18 @@ var pointsRightPlayer = 0;
 function getScore(req, res) {
     logger.debug("--- getScore ---");
     var x = logScore();
-    // logger.debug("pointsLeftPlayer: " + pointsLeftPlayer);
-    // logger.debug("pointsRightPlayer: " + pointsRightPlayer);
     res.setHeader('Content-Type', 'application/json');
     var retBody = {
-        "playerLeftName": "Sebastian",
-        "playerRightName": "Matthias",
-        "currentScore": ""+pointsLeftPlayer + " : " + pointsRightPlayer +"",
-        "scoreSet1": "",
-        "scoreSet2": "",
-        "scoreSet3": "",
-        "directWinnersPlayerLeft": "1",
-        "errorsPlayerLeft": "1",
-        "directWinnersPlayerRight": "1",
-        "errorsPlayerRight": "1"
+        "playerLeftName": score.playerLeftName,
+        "playerRightName": score.playerRightName,
+        "currentScore": ""+ score.pointsLeftPlayer + " : " + score.pointsRightPlayer +"",
+        "scoreSet1": ""+ score.sets.first.left + " : " + score.sets.first.right + "",
+        "scoreSet2": ""+ score.sets.second.left + " : " + score.sets.second.right + "",
+        "scoreSet3": ""+ score.sets.third.left + " : " + score.sets.third.right + "",
+        "directWinnersPlayerLeft": score.directWinnersPlayerLeft,
+        "errorsPlayerLeft": score.errorsPlayerLeft,
+        "directWinnersPlayerRight": score.directWinnersPlayerRight,
+        "errorsPlayerRight": score.directWinnersPlayerRight
     }
 
     res.end(JSON.stringify(retBody));
@@ -45,12 +71,17 @@ function point(req, res) {
     // var workPointInfoPlayer = req.swagger.params.scoreInfo.player.value;
     var scoringPlayer = req.swagger.params.pointInfo.value.player;
     // logger.debug("test " + JSON.stringify(req.swagger.params,null,4));
+
+
+
     switch(scoringPlayer) {
       case "left":
-          pointsLeftPlayer++;
+          prevScore = JSON.parse(JSON.stringify(score));
+          score.pointsLeftPlayer++;
           break;
       case "right":
-          pointsRightPlayer++;
+          var prevScore = JSON.parse(JSON.stringify(score));
+          score.pointsRightPlayer++;
           break;
       default:
           logger.debug("error - with input parameter for scoringPlayer")
@@ -58,6 +89,9 @@ function point(req, res) {
           break;
 
     }
+
+
+
 
     logger.debug("point for player (left or right) :" + scoringPlayer)
     var x = logScore();
@@ -81,6 +115,7 @@ function startNewGame(req, res) {
 // ============================================================================
 function removeLastPoint(req, res) {
     logger.debug("--- removeLastPoint ---");
+    var score = JSON.parse(JSON.stringify(prevScore));
     res.end();
 }
 
@@ -100,8 +135,8 @@ function correct(req, res) {
 // swagGetSpsVarValue
 // ============================================================================
 function logScore() {
-    logger.debug("pointsLeftPlayer: " + pointsLeftPlayer);
-    logger.debug("pointsRightPlayer: " + pointsRightPlayer);
+    logger.debug("score.pointsLeftPlayer: " + score.pointsLeftPlayer);
+    logger.debug("score.pointsRightPlayer: " + score.pointsRightPlayer);
 
 }
 
