@@ -13,6 +13,8 @@
     "js-yaml": "^3.3.0",
     "swagger-tools": "0.9.*",
     "cfenv": "latest",
+    "log4js": "latest",
+    "util": "latest"
   },
   "scripts" : {
    "start" : "node index.js"

@@ -16,7 +16,7 @@ paths:
           description: "Successful response"
         400:
           description: "Bad request"
-      x-swagger-router-controller: "Default"
+      # x-swagger-router-controller: "Default"
     x-swagger-router-controller: "judge"
   /getScore:
     get:
@@ -31,7 +31,7 @@ paths:
             $ref: "#/definitions/scoreInfo"
         400:
           description: "Bad request"
-      x-swagger-router-controller: "Default"
+      # x-swagger-router-controller: "Default"
     x-swagger-router-controller: "judge"
   /point:
     post:
@@ -53,7 +53,7 @@ paths:
             \ PLC"
         404:
           description: "Not found - Could not find configuration file"
-      x-swagger-router-controller: "Default"
+      #x-swagger-router-controller: "Default"
     x-swagger-router-controller: "judge"
   /startNewGame:
     post:
@@ -66,7 +66,7 @@ paths:
           description: "Successful response"
         400:
           description: "Bad request"
-      x-swagger-router-controller: "Default"
+      #x-swagger-router-controller: "Default"
     x-swagger-router-controller: "judge"
 definitions:
   scoreInfo:
