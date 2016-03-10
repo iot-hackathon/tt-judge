@@ -1,0 +1,175 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+# This is your document metadata
+info:
+  title: judge
+  description: |
+    judge description
+  version: "0.8.2"
+
+# array of all schemes that your api supports
+#schemes:
+#  - https
+# Describe your paths here
+paths:
+  #
+  /point:
+    # x-swagger-router-controller defines the controller file name in ./controllers
+    # note: swagger doc refers to the wrong folder
+    # note: After code generation an additional x-swagger-router-controller route to the Default.js file is generated.
+    #       This additional x-swagger-router-controller entry has to be removed to enable invocation of operationId
+    #       (./api/swagger.yaml)
+    x-swagger-router-controller: judge
+    # This is a HTTP operation
+    post:
+      # This is the function called by swagger in controller file
+      operationId: point
+      summary:
+        add point to score
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        add point to score
+        
+      # Expected responses for this operation:
+      parameters:
+        - name: scoreInfo
+          in: body
+          description: Value (true or false)
+          required: true
+          schema:
+            $ref: '#/definitions/pointInfo'
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+        400:
+          description: Bad request - Could not establish communication with Beckhoff PLC
+        404:
+          description: Not found - Could not find configuration file
+  /correct:
+    # x-swagger-router-controller defines the controller file name in ./controllers
+    # note: swagger doc refers to the wrong folder
+    # note: After code generation an additional x-swagger-router-controller route to the Default.js file is generated.
+    #       This additional x-swagger-router-controller entry has to be removed to enable invocation of operationId
+    #       (./api/swagger.yaml)
+    x-swagger-router-controller: judge
+    # This is a HTTP operation
+    post:
+      # This is the function called by swagger in controller file
+      operationId: correct
+      summary:
+        Remove last point for correction
+      # Describe this verb here. Note: you can use markdown
+      description: |
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+        400:
+          description: Bad request
+          
+  /getScore:
+    # x-swagger-router-controller defines the controller file name in ./controllers
+    # note: swagger doc refers to the wrong folder
+    # note: After code generation an additional x-swagger-router-controller route to the Default.js file is generated.
+    #       This additional x-swagger-router-controller entry has to be removed to enable invocation of operationId
+    #       (./api/swagger.yaml)
+    x-swagger-router-controller: judge
+    # This is a HTTP operation
+    get:
+      # This is the function called by swagger in controller file
+      operationId: getScore
+      summary:
+        getScore
+      # Describe this verb here. Note: you can use markdown
+      description: |
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+              # type: integer
+              $ref: '#/definitions/scoreInfo'
+        400:
+          description: Bad request
+          
+ 
+  /startNewGame:
+    # x-swagger-router-controller defines the controller file name in ./controllers
+    # note: swagger doc refers to the wrong folder
+    # note: After code generation an additional x-swagger-router-controller route to the Default.js file is generated.
+    #       This additional x-swagger-router-controller entry has to be removed to enable invocation of operationId
+    #       (./api/swagger.yaml)
+    x-swagger-router-controller: judge
+    # This is a HTTP operation
+    post:
+      # This is the function called by swagger in controller file
+      operationId: startNewGame
+      summary:
+        Remove last point for correction
+      # Describe this verb here. Note: you can use markdown
+      description: |
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+        400:
+          description: Bad request
+definitions:
+  scoreInfo:
+    type: object
+    required:
+      - playerLeftName
+      - playerRightName
+      - currentScore
+      - scoreSet1
+      - scoreSet2
+      - scoreSet3
+      - directWinnersPlayerLeft
+      - errorsPlayerLeft
+      - directWinnersPlayerRight
+      - errorsPlayerRight
+    properties:
+      playerLeftName:
+        type: string
+      playerRightName:
+        type: string
+      currentScore:
+        type: string
+      scoreSet1:
+        type: string
+      scoreSet2:
+        type: string
+      scoreSet3:
+        type: string
+      directWinnersPlayerLeft:
+        type: string
+      errorsPlayerLeft:
+        type: string
+      directWinnersPlayerRight:
+        type: string
+      errorsPlayerRight:
+        type: string
+  pointInfo:
+    type: object
+    required:
+      - player
+      - pointType
+    properties:
+      player:
+        type: string
+      pointType:
+        type: string

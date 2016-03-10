@@ -1,0 +1,115 @@
+---
+swagger: "2.0"
+info:
+  description: "judge description\n"
+  version: "0.8.2"
+  title: "judge"
+paths:
+  /correct:
+    post:
+      summary: "Remove last point for correction"
+      description: ""
+      operationId: "correct"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Bad request"
+      x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "judge"
+  /getScore:
+    get:
+      summary: "getScore"
+      description: ""
+      operationId: "getScore"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/scoreInfo"
+        400:
+          description: "Bad request"
+      x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "judge"
+  /point:
+    post:
+      summary: "add point to score"
+      description: "add point to score\n"
+      operationId: "point"
+      parameters:
+      - in: "body"
+        name: "scoreInfo"
+        description: "Value (true or false)"
+        required: true
+        schema:
+          $ref: "#/definitions/pointInfo"
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Bad request - Could not establish communication with Beckhoff\
+            \ PLC"
+        404:
+          description: "Not found - Could not find configuration file"
+      x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "judge"
+  /startNewGame:
+    post:
+      summary: "Remove last point for correction"
+      description: ""
+      operationId: "startNewGame"
+      parameters: []
+      responses:
+        200:
+          description: "Successful response"
+        400:
+          description: "Bad request"
+      x-swagger-router-controller: "Default"
+    x-swagger-router-controller: "judge"
+definitions:
+  scoreInfo:
+    type: "object"
+    required:
+    - "currentScore"
+    - "directWinnersPlayerLeft"
+    - "directWinnersPlayerRight"
+    - "errorsPlayerLeft"
+    - "errorsPlayerRight"
+    - "playerLeftName"
+    - "playerRightName"
+    - "scoreSet1"
+    - "scoreSet2"
+    - "scoreSet3"
+    properties:
+      playerLeftName:
+        type: "string"
+      playerRightName:
+        type: "string"
+      currentScore:
+        type: "string"
+      scoreSet1:
+        type: "string"
+      scoreSet2:
+        type: "string"
+      scoreSet3:
+        type: "string"
+      directWinnersPlayerLeft:
+        type: "string"
+      errorsPlayerLeft:
+        type: "string"
+      directWinnersPlayerRight:
+        type: "string"
+      errorsPlayerRight:
+        type: "string"
+  pointInfo:
+    type: "object"
+    required:
+    - "player"
+    - "pointType"
+    properties:
+      player:
+        type: "string"
+      pointType:
+        type: "string"
