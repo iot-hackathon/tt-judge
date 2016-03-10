@@ -99,6 +99,7 @@ function startNewGame(req, res) {
     logger.debug("--- startNewGame ---");
     score = JSON.parse(JSON.stringify(emptyScore));
     prevScore = JSON.parse(JSON.stringify(emptyScore));
+    logScore();
     res.end();
 }
 
