@@ -34,7 +34,7 @@ paths:
         
       # Expected responses for this operation:
       parameters:
-        - name: scoreInfo
+        - name: pointInfo
           in: body
           description: Value (true or false)
           required: true

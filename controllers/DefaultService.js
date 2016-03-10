@@ -44,7 +44,7 @@ exports.getScore = function(args, res, next) {
 exports.point = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * scoreInfo (PointInfo)
+  * pointInfo (PointInfo)
   **/
   // no response value expected for this operation
   

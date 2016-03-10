@@ -31,7 +31,7 @@ paths:
             $ref: "#/definitions/scoreInfo"
         400:
           description: "Bad request"
-      # x-swagger-router-controller: "Default"
+      #x-swagger-router-controller: "Default"
     x-swagger-router-controller: "judge"
   /point:
     post:
@@ -40,7 +40,7 @@ paths:
       operationId: "point"
       parameters:
       - in: "body"
-        name: "scoreInfo"
+        name: "pointInfo"
         description: "Value (true or false)"
         required: true
         schema:
