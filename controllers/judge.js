@@ -32,6 +32,7 @@ var score = {
     }
 }
 
+var emptyScore = JSON.parse(JSON.stringify(score));
 var prevScore = JSON.parse(JSON.stringify(score));
 
 // var pointsLeftPlayer = 0;
@@ -70,9 +71,6 @@ function point(req, res) {
     logger.debug("--- point ---");
     // var workPointInfoPlayer = req.swagger.params.scoreInfo.player.value;
     var scoringPlayer = req.swagger.params.pointInfo.value.player;
-    // logger.debug("test " + JSON.stringify(req.swagger.params,null,4));
-
-
 
     switch(scoringPlayer) {
       case "left":
@@ -80,18 +78,14 @@ function point(req, res) {
           score.pointsLeftPlayer++;
           break;
       case "right":
-          var prevScore = JSON.parse(JSON.stringify(score));
+          prevScore = JSON.parse(JSON.stringify(score));
           score.pointsRightPlayer++;
           break;
       default:
           logger.debug("error - with input parameter for scoringPlayer")
           return;
           break;
-
     }
-
-
-
 
     logger.debug("point for player (left or right) :" + scoringPlayer)
     var x = logScore();
@@ -103,19 +97,7 @@ function point(req, res) {
 // ============================================================================
 function startNewGame(req, res) {
     logger.debug("--- startNewGame ---");
-    var pointsLeftPlayer = 0;
-    var pointsRightPlayer = 0;
-    res.end();
-}
-
-
-
-// ============================================================================
-// swagPutSpsVarValue
-// ============================================================================
-function removeLastPoint(req, res) {
-    logger.debug("--- removeLastPoint ---");
-    var score = JSON.parse(JSON.stringify(prevScore));
+    score = JSON.parse(JSON.stringify(emptyScore));
     res.end();
 }
 
@@ -127,6 +109,8 @@ function removeLastPoint(req, res) {
 // ============================================================================
 function correct(req, res) {
     logger.debug("--- correct ---");
+    score = JSON.parse(JSON.stringify(prevScore));
+    logScore();
     res.end();
 }
 
@@ -135,9 +119,16 @@ function correct(req, res) {
 // swagGetSpsVarValue
 // ============================================================================
 function logScore() {
+    logger.debug("===================================================");
     logger.debug("score.pointsLeftPlayer: " + score.pointsLeftPlayer);
     logger.debug("score.pointsRightPlayer: " + score.pointsRightPlayer);
-
+    logger.debug("===================================================");
+    logger.debug("prevScore.pointsLeftPlayer: " + prevScore.pointsLeftPlayer);
+    logger.debug("prevScore.pointsRightPlayer: " + prevScore.pointsRightPlayer);
+    logger.debug("===================================================");
+    logger.debug("score");
+    logger.debug(JSON.stringify(score,null,4));
+    logger.debug(JSON.stringify(prevScore,null,4));
 }
 
 
@@ -150,6 +141,5 @@ module.exports = {
   "getScore": getScore,
   "point": point,
   "startNewGame": startNewGame,
-  "removeLastPoint": removeLastPoint,
   "correct": correct
 }
