@@ -18,12 +18,12 @@ var score = {
     "errorsPlayerRight": "0",
     "sets" : {
       "first" : {
-        "left": 0,
-        "right" : 0
+        "left": 10,
+        "right" : 4
       },
       "second" : {
-        "left": 0,
-        "right" : 0
+        "left": 8,
+        "right" : 10
       },
       "third" : {
         "left": 0,
