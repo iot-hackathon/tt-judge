@@ -12,10 +12,10 @@ var score = {
     "playerRightName": "Matthias",
     "pointsLeftPlayer": 0,
     "pointsRightPlayer": 0,
-    "directWinnersPlayerLeft": "0",
-    "errorsPlayerLeft": "0",
-    "directWinnersPlayerRight": "0",
-    "errorsPlayerRight": "0",
+    "directWinnersPlayerLeft": 0,
+    "errorsPlayerLeft": 0,
+    "directWinnersPlayerRight": 0,
+    "errorsPlayerRight": 0,
     "sets" : {
       "first" : {
         "left": 10,
@@ -71,24 +71,35 @@ function point(req, res) {
     logger.debug("--- point ---");
     // var workPointInfoPlayer = req.swagger.params.scoreInfo.player.value;
     var scoringPlayer = req.swagger.params.pointInfo.value.player;
+    var pointType = req.swagger.params.pointInfo.value.pointType;
 
     switch(scoringPlayer) {
       case "left":
           prevScore = JSON.parse(JSON.stringify(score));
           score.pointsLeftPlayer++;
+          if (pointType == "winner")
+            score.directWinnersPlayerLeft++;
+          if (pointType == "error")
+            score.errorsPlayerRight++;
           break;
       case "right":
           prevScore = JSON.parse(JSON.stringify(score));
           score.pointsRightPlayer++;
+          if (pointType == "winner")
+            score.directWinnersPlayerRight++;
+          if (pointType == "error")
+            score.errorsPlayerLeft++;
           break;
       default:
           logger.debug("error - with input parameter for scoringPlayer")
           return;
           break;
     }
-
+    logger.debug("test1");
     logger.debug("point for player (left or right) :" + scoringPlayer)
+    logger.debug("test2");
     var x = logScore();
+    logger.debug("test3");
     res.end();
 }
 
