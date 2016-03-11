@@ -8,8 +8,8 @@ var util = require('util');
 
 
 var score = {
-    "playerLeftName": "Sebastian",
-    "playerRightName": "Matthias",
+    "playerLeftName": "Hoang",
+    "playerRightName": "Christian",
     "pointsLeftPlayer": 0,
     "pointsRightPlayer": 0,
     "directWinnersPlayerLeft": 0,
