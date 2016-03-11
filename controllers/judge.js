@@ -54,9 +54,9 @@ function getScore(req, res) {
         "scoreSet1": ""+ score.sets.first.left + " : " + score.sets.first.right + "",
         "scoreSet2": ""+ score.sets.second.left + " : " + score.sets.second.right + "",
         "scoreSet3": ""+ score.sets.third.left + " : " + score.sets.third.right + "",
-        "directWinnersPlayerLeft": score.directWinnersPlayerLeft,
+        "directWinnersPlayerLeft": score.pointsLeftPlayer,
         "errorsPlayerLeft": score.errorsPlayerLeft,
-        "directWinnersPlayerRight": score.directWinnersPlayerRight,
+        "directWinnersPlayerRight": score.pointsRightPlayer,
         "errorsPlayerRight": score.directWinnersPlayerRight
     }
 
