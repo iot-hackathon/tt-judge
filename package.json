@@ -14,7 +14,8 @@
     "swagger-tools": "0.9.*",
     "cfenv": "latest",
     "log4js": "latest",
-    "util": "latest"
+    "util": "latest",
+    "cors": "latest"
   },
   "scripts" : {
    "start" : "node index.js"
